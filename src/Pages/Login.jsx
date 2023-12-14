@@ -1,4 +1,4 @@
-import google from '../assets/images/SigninGoogle.png'
+import {google} from '../assets/images/index'
 import {  signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {addUser} from '../../redux/gladysSlice'
 import { auth } from '../../firebase.config';
