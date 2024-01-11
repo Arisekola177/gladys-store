@@ -14,7 +14,7 @@ const Cart = () => {
   
   const dispatch = useDispatch()
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full md:mt-32 lg:mt-24 mt-24'>
         {productData.length === 0 ? (
           <div className='text-center '>
           <p className='text-center text-3xl font-semibold mt-5 mb-10 text-red-500'>Cart is Empty!!!</p>
@@ -24,6 +24,7 @@ const Cart = () => {
           </div>
         ) : (
              <>
+             <h1 className='text-center text-3xl font-bold font-montserrat'>Cart</h1>
                <div className='w-full flex flex-col mt-10 md:max-w-screen-md lg:max-w-screen-lg md:mx-auto md:gap-5'>
                      <div className='w-full gap-2 px-6 md:px-0 '>
                        <CartItems productData={productData}  />

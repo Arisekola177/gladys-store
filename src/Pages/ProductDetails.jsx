@@ -38,7 +38,7 @@ const ProductDetails = () => {
   }, [location.state.product, details.id]);
 
   return (
-    <div className="w-full">
+    <div className="w-full mt-32">
       <div>
         {details && (
           <div className="grid grid-cols-1 md:grid-cols-2">

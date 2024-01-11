@@ -41,7 +41,7 @@ function Banner() {
     }
 
   return (
-    <div className='relative'>
+    <div className='relative mt-16 md:20 '>
          
       
          <Slider {...settings}>

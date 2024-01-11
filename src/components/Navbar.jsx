@@ -19,12 +19,13 @@ const Navbar = () => {
 
   const Links = [
     {name: "Home", path: '/'},
-    {name: "Products", path: '/products'},
-    
+    {name: "Shop", path: '/products'},
+    {name: "Contact", path: '#'},
+    {name: "About", path: '#'},
   ]
 
   const [open, isOpen] = useState('')
-  const [ query, setQuery] = useState("")
+  
 
   const handleNavbar = () => {
     isOpen(!open)
@@ -40,7 +41,7 @@ const Navbar = () => {
   }
   
   return (
-    <div className="font-montserrat w-full bg-primary border-b-[2px] border-gray-400 sticky top-0 z-50 backdrop-blur-2xl transition-colors">
+    <div className="font-montserrat w-full bg-primary border-b-[2px] border-gray-400 fixed top-0 z-50 backdrop-blur-2xl transition-colors">
              
         <div className="w-11/12 mx-auto flex justify-between gap-4 items-center py-4 ">
               
@@ -50,24 +51,35 @@ const Navbar = () => {
              </Link>
            
              
-
-
-
-             <div className="hidden md:flex flex-1 relative  gap-2 justify-between  items-center ">
-              <input 
-              className="w-[100%] py-2 px-5 rounded-lg text-sm outline-none" type="text"
-               value={query}
-               onChange={(e) => setQuery(e.target.value)}
-              />
-               <div className="absolute top-3 left-2"><FaSearch /></div>
-              <div className="bg-red-500 text-white rounded-lg hover:bg-transparent hover:text-black duration-500 hover:border hover:rounded-lg hover:border-red-500">
-              <button className="py-2 px-5 ">Search</button>
-              </div>
+             <div className="hidden md:flex items-center md:gap-2 lg:gap-6">
+                {
+                  Links.map((link) => (
+                    <div className="hover:underline hover:underline-offset-8 duration-500" key={link.name}>
+                      <Link className="font-bold text-sm text-slate-800 hover:text-red-500 " to={link.path}>
+                        {link.name}
+                      </Link>
+                   </div>
+                  ))
+                }
              </div>
-            
+
              <div className="hidden md:flex gap-4  items-center">
-                <img className="w-[30px] rounded-full" src={userInfo? (userInfo.image) : (user)} alt="user" />
-                <div className="relative">
+               
+                {
+                  userInfo ? (
+                    <div className="flex md:gap-2 lg:gap-5 items-center">
+                      <img className="w-[40px] rounded-full" src={userInfo.image} alt="user" />
+                      <div>
+                        <p className="font-mono underline">{userInfo.name}</p>
+                        <p className="hidden lg:block font-mono">{userInfo.email}</p>
+                      </div>
+                    </div>
+                  ) : (
+                  <div>
+                      <img className="w-[40px] rounded-full" src={user} alt="user" />
+                  </div>)
+                }
+                <div className="relative ">
                   <Link to='/cart'>
                 <img className="w-[35px]" src={cart} alt="cart" />
                 </Link>
@@ -87,7 +99,7 @@ const Navbar = () => {
                
                <div className="">
                  <Link to='/cart'>
-                <img className="w-[35px]" src={cart} alt="cart" />
+                <img className="w-[25px]" src={cart} alt="cart" />
                 </Link>
                 <div className="absolute top-3 right-18 bg-red-500 rounded-lg text-white">
                 <span className="p-1 text-sm">{productData.length}</span>
@@ -98,7 +110,7 @@ const Navbar = () => {
                   </div>
              </div>
              
-             <div className={`absolute bg-white z-[1] left-0 w-[100%] h-96  transition-all duration-500  ${open ? 'top-16 ':'top-[-490px]'}`}>
+             <div className={`absolute bg-white z-[1] left-0 w-[100%]  transition-all duration-500  ${open ? 'top-16 ':'top-[-490px]'}`}>
                   
              <div className="flex flex-col gap-8 mt-5 px-8" > 
               {
@@ -112,7 +124,20 @@ const Navbar = () => {
                }
                 <div className="flex flex-col gap-4 relative ">
                
-                <img className="w-[30px] rounded-full" src={userInfo? (userInfo.image) : (user)} alt="user" />
+                {
+                  userInfo ? (
+                    <div className="flex flex-col gap-5 items-start">
+                      <img className="w-[40px] rounded-full" src={userInfo.image} alt="user" />
+                      <div>
+                        <p className="font-mono underline">{userInfo.name}</p>
+                        <p className="font-mono">{userInfo.email}</p>
+                      </div>
+                    </div>
+                  ) : (
+                  <div>
+                      <img className="w-[40px] rounded-full" src={user} alt="user" />
+                  </div>)
+                }
                 <div className="bg-red-500 mx-auto text-white rounded-lg hover:bg-transparent hover:text-black duration-500 hover:border hover:rounded-lg hover:border-red-500">
                   {userInfo ? (
                   <button onClick={handleSignOut} className="py-2 px-5">Logout</button>

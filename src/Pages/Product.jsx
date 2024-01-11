@@ -1,55 +1,51 @@
-import products from "../assets/data/products"
+
 import ProductCard from "../components/ProductCard"
 import ReactPaginate from 'react-paginate'
 import { useState } from "react"
 import Category from "../components/Category"
 
-const Project = () => {
+const Product= ({data}) => {
 
-  const [data, setData] = useState(products)
+  const [productdata, setProductData] = useState(data)
 
-  const shuffledData = [...data];
+  const shuffledData = [...productdata];
   for (let i = shuffledData.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(Math.random() * (i + 1));  v
     [shuffledData[i], shuffledData[j]] = [shuffledData[j], shuffledData[i]];
   }
-
   const menuItems = [...new Set(data.map((product) => product.category))]
    
   const filterResult = (catItems) => {
     const result = data.filter((curData) => curData.category === catItems)
-    setData(result)
+    setProductData(result)
   }
-
   const [ pageNumber, setPageNumber] = useState(0);
 
   const productPerPage = 9;
   const pageVisited = pageNumber * productPerPage;
-  const displayProducts = shuffledData.slice(pageVisited, pageVisited + productPerPage).map((product) => {
-    return (
-      <div className="shadow border rounded-lg md:w-[250px]  lg:w-[300px] md:h-[420px] lg:h-[380px] mx-auto "  key={product.id}>
-      <ProductCard product={product} />
-     </div>
-    )
-  })
-
- const pageCount = Math.ceil(products.length / productPerPage);
+  const displayProducts = shuffledData.slice(pageVisited, pageVisited + productPerPage)
+ const pageCount = Math.ceil(productdata.length / productPerPage);
 
  const changePage = ({selected}) => {
   setPageNumber(selected)
  }
-
-
-
   return (
-    <div className="w-full" >
+    <div className="w-full mt-28 md:mt-40" >
    
          <div className="flex justify-between gap-5 mt-5">
-              <Category menuItems={menuItems} filterResult={filterResult} setData={setData} />
+              <Category menuItems={menuItems} filterResult={filterResult} setProductData={setProductData} />
             <div className="w-full lg:w-10/12">
                 <h1 className="text-xl text-center font-montserrat text-red-500">All Products</h1>
                 <div className="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2  mt-8 gap-4 w-10/12 mx-auto">
-                { displayProducts }   
+                    {
+                       displayProducts.map((product) => 
+                         (
+                          <div className="shadow border rounded-lg md:w-[250px]  lg:w-[300px] md:h-[420px] lg:h-[380px] mx-auto "  key={product.id}>
+                          <ProductCard product={product} />
+                         </div>
+                        )
+                      )
+                    }
              </div>
              <ReactPaginate 
                   previousLabel={"previous"}
@@ -67,4 +63,4 @@ const Project = () => {
   )
 }
 
-export default Project
+export default Product0

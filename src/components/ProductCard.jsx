@@ -39,7 +39,7 @@ const ProductCard = ({product}) => {
                       </div>
                        <div className="flex justify-between items-center mt-4">
                       <p className="py-4 px-4 font-mono">Category: {product.category}</p>
-                      <div className=" cursor-pointer px-4">
+                      <div className="cursor-pointer px-4 ">
                         <button onClick={() => dispatch(addToCart({
                                       id: product.id,
                                       title: product.productName,
@@ -48,7 +48,7 @@ const ProductCard = ({product}) => {
                                       quantity: 1,
                                       description: product.description
                     })) & toast.success(`${product.productName} is added`)}>
-                           <FaCartPlus className="text-2xl" />
+                           <FaCartPlus className="text-2xl hover:text-red-500" />
                         </button>
                               
                             </div>

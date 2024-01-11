@@ -1,13 +1,13 @@
 import products from "../assets/data/products";
 
-const Buttons = ({menuItems, filterResult, setData}) => {
+const Buttons = ({menuItems, filterResult, setProductData }) => {
 
 const customColors = ["#dbd597", "#b5db97", "#65a89b", "#6584a8", "#8065a8", "#65a869", "#a865a5"];
 
 
   return (
     <div className="hidden w-11/12 xl:w-8/12 mx-auto md:flex justify-between items-center mt-8">
-                <button className="text-white px-8 py-2 rounded-md bg-slate-800" onClick={() => setData(products)} >
+                <button className="text-white px-8 py-2 rounded-md bg-slate-800" onClick={() => setProductData(products)} >
                     All
                 </button>
         {

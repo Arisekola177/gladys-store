@@ -33,7 +33,7 @@ const Login = () => {
   };
  
   return (
-    <div className="flex justify-center items-center mt-10">
+    <div className="flex justify-center items-center mt-32">
        <div className="flex flex-col gap-3">
          <div onClick={handleGoogleLogin} className="w-[250px] border rounded-lg flex gap-4 items-center py-2 px-6 cursor-pointer ">
             <img className='w-[40px]' src={google} alt='google' />
