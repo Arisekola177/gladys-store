@@ -10,7 +10,7 @@ const Product= ({data}) => {
 
   const shuffledData = [...productdata];
   for (let i = shuffledData.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));  v
+    const j = Math.floor(Math.random() * (i + 1));  
     [shuffledData[i], shuffledData[j]] = [shuffledData[j], shuffledData[i]];
   }
   const menuItems = [...new Set(data.map((product) => product.category))]
@@ -63,4 +63,4 @@ const Product= ({data}) => {
   )
 }
 
-export default Product0
+export default Product
