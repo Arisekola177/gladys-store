@@ -1,35 +1,33 @@
 import {google} from '../assets/images/index'
-import {  signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, } from "firebase/auth";
 import {addUser} from '../../redux/gladysSlice'
-import { auth } from '../../firebase.config';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider()
 
-  const handleGoogleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const result = await signInWithPopup(auth, provider);
+  const handleGoogleLogin = async () => {
+ 
+    signInWithPopup(auth, provider).then((result) => {
+     
       const user = result.user;
-  
       dispatch(addUser({
-        id: user.id,
-        name: user.displayName,
-        email: user.email,
-        image: user.photoURL,
-      }));
-  
-      setTimeout(() => {
-        navigate('/');
-      }, 1500);
-    } catch (error) {
-      console.error("Google Sign-In Error:", error);
-      // Display a user-friendly error message
-    }
+      id: user.id,
+      name: user.displayName,
+      email:user.email,
+      image: user.photoURL
+    })
+    )
+    setTimeout(() => {
+     navigate('/')
+    }, 1500)
+    }).catch((error) => {
+     console.log(error)
+    });
   };
  
   return (

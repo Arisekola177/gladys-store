@@ -4,9 +4,8 @@ import cart from '../assets/images/icon-cart.svg'
 import logo from '../assets/images/eco-logo.png'
 import {FaBars, FaTimes, FaSearch } from 'react-icons/fa'
 import { useState } from "react"
+import { getAuth, signOut } from "firebase/auth";
 import { useSelector } from "react-redux"
-import { signOut } from "firebase/auth"
-import { auth } from "../../firebase.config"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
 import { removeUser } from "../../redux/gladysSlice"
@@ -16,6 +15,7 @@ const Navbar = () => {
   const userInfo = useSelector((state) => state.gladys.userInfo)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const auth = getAuth();
 
   const Links = [
     {name: "Home", path: '/'},
